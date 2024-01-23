@@ -1,7 +1,6 @@
 package cat.itacademy.barcelonactiva.solereina.manel.s05.t01.n01.controllers;
 
 import cat.itacademy.barcelonactiva.solereina.manel.s05.t01.n01.model.domain.Sucursal;
-import cat.itacademy.barcelonactiva.solereina.manel.s05.t01.n01.model.repository.SucursalRepository;
 import cat.itacademy.barcelonactiva.solereina.manel.s05.t01.n01.model.services.SucursalService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

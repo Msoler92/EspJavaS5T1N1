@@ -1,5 +1,7 @@
 package cat.itacademy.barcelonactiva.solereina.manel.s05.t01.n01.model.dto;
 
+import cat.itacademy.barcelonactiva.solereina.manel.s05.t01.n01.model.domain.Sucursal;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,5 +46,29 @@ public class SucursalDTO {
 
     public void setTipusSucursal(String tipusSucursal) {
         this.tipusSucursal = tipusSucursal;
+    }
+
+    public static SucursalDTO toSucursalDTO(Sucursal sucursal) {
+        SucursalDTO sucursalDTO = new SucursalDTO();
+        sucursalDTO.setPk_SucursalID(sucursal.getPk_SucursalID());
+        sucursalDTO.setNomSucursal(sucursal.getNomSucursal());
+        sucursalDTO.setPaisSucursal(sucursal.getPaisSucursal());
+
+        if (SucursalDTO.getPaisosUe().contains(sucursal.getPaisSucursal())) {
+            sucursalDTO.setTipusSucursal("UE");
+        } else {
+            sucursalDTO.setTipusSucursal("Fora UE");
+        }
+
+        return sucursalDTO;
+    }
+
+    public static Sucursal toSucursal (SucursalDTO sucursalDTO) {
+        Sucursal sucursal = new Sucursal();
+        sucursal.setPk_SucursalID(sucursalDTO.getPk_SucursalID());
+        sucursal.setNomSucursal(sucursalDTO.getNomSucursal());
+        sucursal.setPaisSucursal(sucursalDTO.getPaisSucursal());
+
+        return sucursal;
     }
 }

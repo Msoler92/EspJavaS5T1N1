@@ -1,7 +1,6 @@
 package cat.itacademy.barcelonactiva.solereina.manel.s05.t01.n01.model.domain;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 
 
 @Entity

@@ -17,7 +17,8 @@ public class SucursalController {
     @Autowired
     SucursalService sucursalService;
     @GetMapping("/signup")
-    public String showSignUpForm(SucursalDTO sucursal) {
+    public String showSignUpForm(SucursalDTO sucursal, Model model) {
+        model.addAttribute("sucursal", new SucursalDTO());
         return "add-sucursal";
     }
 

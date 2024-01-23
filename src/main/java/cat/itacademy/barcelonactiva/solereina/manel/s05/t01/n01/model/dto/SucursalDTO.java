@@ -1,7 +1,6 @@
 package cat.itacademy.barcelonactiva.solereina.manel.s05.t01.n01.model.dto;
 
 import cat.itacademy.barcelonactiva.solereina.manel.s05.t01.n01.model.domain.Sucursal;
-import jakarta.validation.constraints.NotBlank;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,9 +8,7 @@ import java.util.List;
 public class SucursalDTO {
     private static final List<String> PAISOS_UE = new ArrayList<>();
     private Integer pk_SucursalID;
-    @NotBlank(message = "Aquest camp és obligatori")
     private String nomSucursal;
-    @NotBlank(message = "Aquest camp és obligatori")
     private String paisSucursal;
     private String tipusSucursal;
 

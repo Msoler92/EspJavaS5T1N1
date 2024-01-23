@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title> CRUD amb Spring Boot i MySQL</title>
+</head>
+<body>
+<div th:switch="${sucursalList}">
+    <h2 th:case="null">Encara no hi ha cap sucursal registrada!</h2>
+    <div th:case="*">
+        <h2>Sucursals</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Pais</th>
+                <th>Modificar</th>
+                <th>Eliminar</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="sucursal : ${sucursalList}">
+                <td th:text="${sucursal.nomSucursal}"></td>
+                <td th:text="${sucursal.paisSucursal}"></td>
+                <td><a th:href="@{/edit/{id}(id=${sucursal.pk_SucursalID})}">Edit</a></td>
+                <td><a th:href="@{/delete/{id}(id=${sucursal.pk_SucursalID})}">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p><a href="/signup">Nova sucursal</a></p>
+</div>
+</body>
+</html>

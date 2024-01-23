@@ -1,6 +1,7 @@
 package cat.itacademy.barcelonactiva.solereina.manel.s05.t01.n01.model.services;
 
 import cat.itacademy.barcelonactiva.solereina.manel.s05.t01.n01.model.domain.Sucursal;
+import cat.itacademy.barcelonactiva.solereina.manel.s05.t01.n01.model.dto.SucursalDTO;
 import cat.itacademy.barcelonactiva.solereina.manel.s05.t01.n01.model.repository.SucursalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,17 +15,23 @@ public class SucursalServiceImpl implements SucursalService {
     @Autowired
     private SucursalRepository sucursalRepository;
 
-    public Sucursal findById(int id) {
+    public SucursalDTO findById(int id) {
         Optional<Sucursal> sucursal = sucursalRepository.findById(id);
-        return sucursal.orElse(null);
+
+        if (sucursal.isEmpty()) {
+            return null;
+        }
+        return SucursalDTO.fromSucursal(sucursal.get());
     }
 
-    public List<Sucursal> findAll() {
-        return sucursalRepository.findAll();
+    public List<SucursalDTO> findAll() {
+        return sucursalRepository.findAll().stream().map(SucursalDTO::fromSucursal).collect(Collectors.toList());
 
     }
-    public Sucursal saveOrUpdate (Sucursal sucursal) {
-        return sucursalRepository.save(sucursal);
+    public SucursalDTO saveOrUpdate (SucursalDTO sucursal) {
+        return SucursalDTO.fromSucursal(
+                sucursalRepository.save(
+                        SucursalDTO.toSucursal(sucursal)));
     }
     public void deleteById(int id) {
         sucursalRepository.deleteById(id);

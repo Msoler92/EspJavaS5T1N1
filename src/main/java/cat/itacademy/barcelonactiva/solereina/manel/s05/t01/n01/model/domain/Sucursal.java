@@ -11,11 +11,9 @@ public class Sucursal {
     private Integer pk_SucursalID;
 
     @Column(name = "Nom")
-    @NotBlank(message = "Aquest camp és obligatori")
     private String nomSucursal;
 
     @Column(name = "Pais")
-    @NotBlank(message = "Aquest camp és obligatori")
     private String paisSucursal;
 
     public Integer getPk_SucursalID() {

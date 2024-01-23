@@ -1,6 +1,6 @@
 package cat.itacademy.barcelonactiva.solereina.manel.s05.t01.n01.controllers;
 
-import cat.itacademy.barcelonactiva.solereina.manel.s05.t01.n01.model.domain.Sucursal;
+import cat.itacademy.barcelonactiva.solereina.manel.s05.t01.n01.model.dto.SucursalDTO;
 import cat.itacademy.barcelonactiva.solereina.manel.s05.t01.n01.model.services.SucursalService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +17,12 @@ public class SucursalController {
     @Autowired
     SucursalService sucursalService;
     @GetMapping("/signup")
-    public String showSignUpForm(Sucursal sucursal) {
+    public String showSignUpForm(SucursalDTO sucursal) {
         return "add-sucursal";
     }
 
     @PostMapping("/addsucursal")
-    public String addSucursal(@Valid Sucursal sucursal, BindingResult result, Model model) {
+    public String addSucursal(@Valid SucursalDTO sucursal, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "add-sucursal";
         }
@@ -33,7 +33,7 @@ public class SucursalController {
 
     @GetMapping("/edit/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        Sucursal sucursal = sucursalService.findById(id);
+        SucursalDTO sucursal = sucursalService.findById(id);
                 //.orElseThrow(() -> new IllegalArgumentException("Invalid Id:" + id));
 
         model.addAttribute("sucursal", sucursal);
@@ -41,7 +41,7 @@ public class SucursalController {
     }
 
     @PostMapping("/update/{id}")
-    public String updateSucursal(@PathVariable("id") int id, @Valid Sucursal sucursal,
+    public String updateSucursal(@PathVariable("id") int id, @Valid SucursalDTO sucursal,
                              BindingResult result, Model model) {
         sucursal.setPk_SucursalID(id);
         if (result.hasErrors()) {

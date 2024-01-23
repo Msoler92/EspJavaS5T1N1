@@ -1,6 +1,7 @@
 package cat.itacademy.barcelonactiva.solereina.manel.s05.t01.n01.model.dto;
 
 import cat.itacademy.barcelonactiva.solereina.manel.s05.t01.n01.model.domain.Sucursal;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,16 +9,14 @@ import java.util.List;
 public class SucursalDTO {
     private static final List<String> PAISOS_UE = new ArrayList<>();
     private Integer pk_SucursalID;
+    @NotBlank(message = "Aquest camp és obligatori")
     private String nomSucursal;
+    @NotBlank(message = "Aquest camp és obligatori")
     private String paisSucursal;
     private String tipusSucursal;
 
     public static List<String> getPaisosUe() {
         return PAISOS_UE;
-    }
-
-    public SucursalDTO() {
-
     }
 
     public Integer getPk_SucursalID() {
@@ -52,23 +51,26 @@ public class SucursalDTO {
         this.tipusSucursal = tipusSucursal;
     }
 
-    public void fromSucursal(Sucursal sucursal) {
-        pk_SucursalID = sucursal.getPk_SucursalID();
-        nomSucursal = sucursal.getNomSucursal();
-        paisSucursal = sucursal.getPaisSucursal();
+    public static SucursalDTO fromSucursal(Sucursal sucursal) {
+        SucursalDTO sucursalDTO = new SucursalDTO();
+        sucursalDTO.setPk_SucursalID(sucursal.getPk_SucursalID());
+        sucursalDTO.setNomSucursal(sucursal.getNomSucursal());
+        sucursalDTO.setPaisSucursal(sucursal.getPaisSucursal());
 
         if (SucursalDTO.getPaisosUe().contains(sucursal.getPaisSucursal())) {
-            tipusSucursal = "UE";
+            sucursalDTO.setTipusSucursal("UE");
         } else {
-            tipusSucursal ="Fora UE";
+            sucursalDTO.setTipusSucursal("Fora UE");
         }
+
+        return sucursalDTO;
     }
 
-    public Sucursal toSucursal () {
+    public static Sucursal toSucursal (SucursalDTO sucursalDTO) {
         Sucursal sucursal = new Sucursal();
-        sucursal.setPk_SucursalID(pk_SucursalID);
-        sucursal.setNomSucursal(nomSucursal);
-        sucursal.setPaisSucursal(paisSucursal);
+        sucursal.setPk_SucursalID(sucursalDTO.getPk_SucursalID());
+        sucursal.setNomSucursal(sucursalDTO.getNomSucursal());
+        sucursal.setPaisSucursal(sucursalDTO.getPaisSucursal());
 
         return sucursal;
     }

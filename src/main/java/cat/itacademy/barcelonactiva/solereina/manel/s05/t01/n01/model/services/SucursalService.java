@@ -6,11 +6,11 @@ import cat.itacademy.barcelonactiva.solereina.manel.s05.t01.n01.model.dto.Sucurs
 import java.util.List;
 
 public interface SucursalService {
-    public Sucursal findById(int id);
+    public SucursalDTO findById(int id);
 
-    public List<Sucursal> findAll();
+    public List<SucursalDTO> findAll();
 
-    public Sucursal saveOrUpdate (Sucursal sucursal);
+    public SucursalDTO saveOrUpdate (SucursalDTO sucursal);
 
     public void deleteById(int id);
 

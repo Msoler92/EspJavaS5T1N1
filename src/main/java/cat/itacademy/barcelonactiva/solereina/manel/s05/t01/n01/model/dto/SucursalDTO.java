@@ -16,6 +16,10 @@ public class SucursalDTO {
         return PAISOS_UE;
     }
 
+    public SucursalDTO() {
+
+    }
+
     public Integer getPk_SucursalID() {
         return pk_SucursalID;
     }
@@ -48,26 +52,23 @@ public class SucursalDTO {
         this.tipusSucursal = tipusSucursal;
     }
 
-    public static SucursalDTO toSucursalDTO(Sucursal sucursal) {
-        SucursalDTO sucursalDTO = new SucursalDTO();
-        sucursalDTO.setPk_SucursalID(sucursal.getPk_SucursalID());
-        sucursalDTO.setNomSucursal(sucursal.getNomSucursal());
-        sucursalDTO.setPaisSucursal(sucursal.getPaisSucursal());
+    public void fromSucursal(Sucursal sucursal) {
+        pk_SucursalID = sucursal.getPk_SucursalID();
+        nomSucursal = sucursal.getNomSucursal();
+        paisSucursal = sucursal.getPaisSucursal();
 
         if (SucursalDTO.getPaisosUe().contains(sucursal.getPaisSucursal())) {
-            sucursalDTO.setTipusSucursal("UE");
+            tipusSucursal = "UE";
         } else {
-            sucursalDTO.setTipusSucursal("Fora UE");
+            tipusSucursal ="Fora UE";
         }
-
-        return sucursalDTO;
     }
 
-    public static Sucursal toSucursal (SucursalDTO sucursalDTO) {
+    public Sucursal toSucursal () {
         Sucursal sucursal = new Sucursal();
-        sucursal.setPk_SucursalID(sucursalDTO.getPk_SucursalID());
-        sucursal.setNomSucursal(sucursalDTO.getNomSucursal());
-        sucursal.setPaisSucursal(sucursalDTO.getPaisSucursal());
+        sucursal.setPk_SucursalID(pk_SucursalID);
+        sucursal.setNomSucursal(nomSucursal);
+        sucursal.setPaisSucursal(paisSucursal);
 
         return sucursal;
     }

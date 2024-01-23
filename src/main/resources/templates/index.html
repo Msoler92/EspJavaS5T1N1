@@ -15,6 +15,7 @@
             <tr>
                 <th>Nom</th>
                 <th>Pais</th>
+                <th>Tipus</th>
                 <th>Modificar</th>
                 <th>Eliminar</th>
             </tr>
@@ -23,6 +24,7 @@
             <tr th:each="sucursal : ${sucursalList}">
                 <td th:text="${sucursal.nomSucursal}"></td>
                 <td th:text="${sucursal.paisSucursal}"></td>
+                <td th:text="${sucursal.tipusSucursal}"></td>
                 <td><a th:href="@{/edit/{id}(id=${sucursal.pk_SucursalID})}">Edit</a></td>
                 <td><a th:href="@{/delete/{id}(id=${sucursal.pk_SucursalID})}">Delete</a></td>
             </tr>

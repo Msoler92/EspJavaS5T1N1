@@ -25,6 +25,7 @@ public class SucursalController {
     @PostMapping("/addsucursal")
     public String addSucursal(@Valid SucursalDTO sucursal, BindingResult result, Model model) {
         if (result.hasErrors()) {
+            model.addAttribute("sucursal", new SucursalDTO());
             return "add-sucursal";
         }
 

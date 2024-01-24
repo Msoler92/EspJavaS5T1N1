@@ -30,8 +30,18 @@
             </tr>
             </tbody>
         </table>
+
+        <p><a href="/signup">Nova sucursal</a></p>
+
+        <h3>Cercar sucursal</h3>
+        <form action="#" th:action="@{/getOne}" th:object="${sucursal}" method="get">
+            <label for="pk_SucursalID">Codi identificador</label>
+            <input type="text" th:field="*{pk_SucursalID}" id="pk_SucursalID" placeholder="Codi identificador">
+            <span th:if="${#fields.hasErrors('pk_SucursalID')}" th:errors="*{pk_SucursalID}"></span>
+            <input type="submit" value="Cercar">
+        </form>
     </div>
-    <p><a href="/signup">Nova sucursal</a></p>
+
 </div>
 </body>
 </html>

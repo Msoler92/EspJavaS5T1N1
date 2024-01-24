@@ -22,7 +22,7 @@ public class SucursalController {
         return "add-sucursal";
     }
 
-    @PostMapping("/addsucursal")
+    @PostMapping("/add")
     public String addSucursal(@Valid SucursalDTO sucursal, BindingResult result, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("sucursal", new SucursalDTO());
@@ -30,7 +30,7 @@ public class SucursalController {
         }
 
         sucursalService.saveOrUpdate(sucursal);
-        return "redirect:/index";
+        return "redirect:/getAll";
     }
 
     @GetMapping("/edit/{id}")
@@ -50,7 +50,7 @@ public class SucursalController {
             return "update-sucursal";
         }
         sucursalService.saveOrUpdate(sucursal);
-        return "redirect:/index";
+        return "redirect:/getAll";
     }
 
     @GetMapping("/delete/{id}")
@@ -58,17 +58,25 @@ public class SucursalController {
         //Sucursal sucursal = sucursalService.findById(id);
                 //.orElseThrow(() -> new IllegalArgumentException("Invalid Id:" + id));
         sucursalService.deleteById(id);
-        return "redirect:/index";
+        return "redirect:/getAll";
     }
 
-    @GetMapping("/index")
+    @GetMapping("/getAll")
     public String showSucursalList(Model model) {
         model.addAttribute("sucursalList", sucursalService.findAll());
+        model.addAttribute("sucursal", new SucursalDTO());
         return "index";
     }
 
     @GetMapping("/")
     public String indexRedirect() {
-        return "redirect:/index";
+        return "redirect:/getAll";
+    }
+
+    @GetMapping("/getOne")
+    public String showById(SucursalDTO sucursal1, Model model) {
+        SucursalDTO sucursal = sucursalService.findById(sucursal1.getPk_SucursalID());
+        model.addAttribute("sucursal", sucursal);
+        return "show-sucursal";
     }
 }

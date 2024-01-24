@@ -10,9 +10,9 @@
     <div class = "container">
         <h1>Llista de sucursals</h1>
         <hr>
-        <h2>Afegir sucursal</h2>
+        <h2>Afegir sucursal</h2>    
 
-        <form action="#" th:action="@{/addsucursal}" th:object="${sucursal}" method="post">
+        <form action="#" th:action="@{/add}" th:object="${sucursal}" method="post">
             <label for="nomSucursal">Nom sucursal</label>
             <input type="text" th:field="*{nomSucursal}" id="nomSucursal" placeholder="Nom sucursal">
             <span th:if="${#fields.hasErrors('nomSucursal')}" th:errors="*{nomSucursal}"></span>

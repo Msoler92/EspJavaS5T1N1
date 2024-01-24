@@ -74,8 +74,8 @@ public class SucursalController {
     }
 
     @GetMapping("/getOne")
-    public String showById(SucursalDTO sucursal1, Model model) {
-        SucursalDTO sucursal = sucursalService.findById(sucursal1.getPk_SucursalID());
+    public String showSucursal(SucursalDTO dto, Model model) {
+        SucursalDTO sucursal = sucursalService.findById(dto.getPk_SucursalID());
         model.addAttribute("sucursal", sucursal);
         return "show-sucursal";
     }

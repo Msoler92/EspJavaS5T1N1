@@ -13,6 +13,7 @@
         <table>
             <thead>
             <tr>
+                <th>Identificador</th>
                 <th>Nom</th>
                 <th>Pais</th>
                 <th>Tipus</th>
@@ -22,6 +23,7 @@
             </thead>
             <tbody>
             <tr th:each="sucursal : ${sucursalList}">
+                <td th:text="${sucursal.pk_SucursalID}"></td>
                 <td th:text="${sucursal.nomSucursal}"></td>
                 <td th:text="${sucursal.paisSucursal}"></td>
                 <td th:text="${sucursal.tipusSucursal}"></td>
@@ -36,7 +38,7 @@
         <h3>Cercar sucursal</h3>
         <form action="#" th:action="@{/getOne}" th:object="${sucursal}" method="get">
             <label for="pk_SucursalID">Codi identificador</label>
-            <input type="text" th:field="*{pk_SucursalID}" id="pk_SucursalID" placeholder="Codi identificador">
+            <input type="number" th:field="*{pk_SucursalID}" id="pk_SucursalID" placeholder="Codi identificador">
             <span th:if="${#fields.hasErrors('pk_SucursalID')}" th:errors="*{pk_SucursalID}"></span>
             <input type="submit" value="Cercar">
         </form>

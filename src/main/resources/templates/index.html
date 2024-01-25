@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:border="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="ISO-8859-1">
     <title> CRUD amb Spring Boot i MySQL</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
+
 <body>
 <div th:switch="${sucursalList}">
     <h2 th:case="null">Encara no hi ha cap sucursal registrada!</h2>
     <div th:case="*">
         <h2>Sucursals</h2>
-        <table>
+        <table class="table table-striped table-responsive-md">
             <thead>
             <tr>
                 <th>Identificador</th>
@@ -27,20 +29,20 @@
                 <td th:text="${sucursal.nomSucursal}"></td>
                 <td th:text="${sucursal.paisSucursal}"></td>
                 <td th:text="${sucursal.tipusSucursal}"></td>
-                <td><a th:href="@{/edit/{id}(id=${sucursal.pk_SucursalID})}">Edit</a></td>
-                <td><a th:href="@{/delete/{id}(id=${sucursal.pk_SucursalID})}">Delete</a></td>
+                <td><a th:href="@{/edit/{id}(id=${sucursal.pk_SucursalID})}" class="btn btn-primary">Edit</a></td>
+                <td><a th:href="@{/delete/{id}(id=${sucursal.pk_SucursalID})}" class="btn btn-danger">Delete</a></td>
             </tr>
             </tbody>
         </table>
 
-        <p><a href="/signup">Nova sucursal</a></p>
+        <a th:href="@{/signup}" class="btn btn-primary"> Nova sucursal </a>
+        <hr>
 
-        <h3>Cercar sucursal</h3>
+        <h2>Cercar sucursal</h2>
         <form action="#" th:action="@{/getOne}" th:object="${sucursal}" method="get">
-            <label for="pk_SucursalID">Codi identificador</label>
-            <input type="number" th:field="*{pk_SucursalID}" id="pk_SucursalID" placeholder="Codi identificador">
+            <input type="number" th:field="*{pk_SucursalID}" id="pk_SucursalID" placeholder="Codi identificador" class="form-control mb-3 col-3">
             <span th:if="${#fields.hasErrors('pk_SucursalID')}" th:errors="*{pk_SucursalID}"></span>
-            <input type="submit" value="Cercar">
+            <button type="submit" class="btn btn-primary">Cercar</button>
         </form>
     </div>
 

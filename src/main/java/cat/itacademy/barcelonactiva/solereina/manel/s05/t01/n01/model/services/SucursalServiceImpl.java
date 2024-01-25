@@ -2,11 +2,11 @@ package cat.itacademy.barcelonactiva.solereina.manel.s05.t01.n01.model.services;
 
 import cat.itacademy.barcelonactiva.solereina.manel.s05.t01.n01.model.domain.Sucursal;
 import cat.itacademy.barcelonactiva.solereina.manel.s05.t01.n01.model.dto.SucursalDTO;
+import cat.itacademy.barcelonactiva.solereina.manel.s05.t01.n01.model.exceptions.ResourceNotFoundException;
 import cat.itacademy.barcelonactiva.solereina.manel.s05.t01.n01.model.repository.SucursalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -15,11 +15,11 @@ public class SucursalServiceImpl implements SucursalService {
     @Autowired
     private SucursalRepository sucursalRepository;
 
-    public SucursalDTO findById(int id) {
+    public SucursalDTO findById(int id) throws ResourceNotFoundException {
         Optional<Sucursal> sucursal = sucursalRepository.findById(id);
 
         if (sucursal.isEmpty()) {
-            return null;
+            throw new ResourceNotFoundException();
         }
         return SucursalDTO.fromSucursal(sucursal.get());
     }

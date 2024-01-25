@@ -1,21 +1,26 @@
 package cat.itacademy.barcelonactiva.solereina.manel.s05.t01.n01.controllers;
 
 import cat.itacademy.barcelonactiva.solereina.manel.s05.t01.n01.model.dto.SucursalDTO;
+import cat.itacademy.barcelonactiva.solereina.manel.s05.t01.n01.model.exceptions.ResourceNotFoundException;
 import cat.itacademy.barcelonactiva.solereina.manel.s05.t01.n01.model.services.SucursalService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class SucursalController {
 
     @Autowired
     SucursalService sucursalService;
+
     @GetMapping("/signup")
     public String showSignUpForm(SucursalDTO sucursal, Model model) {
         model.addAttribute("sucursal", new SucursalDTO());
@@ -26,6 +31,7 @@ public class SucursalController {
     public String addSucursal(@Valid SucursalDTO sucursal, BindingResult result, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("sucursal", new SucursalDTO());
+            model.addAttribute("errorMessage", "Les dades no són vàlides.");
             return "add-sucursal";
         }
 
@@ -34,9 +40,9 @@ public class SucursalController {
     }
 
     @GetMapping("/edit/{id}")
-    public String showUpdateForm(@PathVariable("id") int id, Model model) {
+    public String showUpdateForm(@PathVariable("id") int id, Model model) throws ResourceNotFoundException {
         SucursalDTO sucursal = sucursalService.findById(id);
-                //.orElseThrow(() -> new IllegalArgumentException("Invalid Id:" + id));
+        //.orElseThrow(() -> new IllegalArgumentException("Invalid Id:" + id));
 
         model.addAttribute("sucursal", sucursal);
         return "update-sucursal";
@@ -44,9 +50,11 @@ public class SucursalController {
 
     @PostMapping("/update/{id}")
     public String updateSucursal(@PathVariable("id") int id, @Valid SucursalDTO sucursal,
-                             BindingResult result, Model model) {
+                                 BindingResult result, Model model) {
         sucursal.setPk_SucursalID(id);
         if (result.hasErrors()) {
+            model.addAttribute("sucursal", sucursal);
+            model.addAttribute("errorMessage", "Les dades no són vàlides.");
             return "update-sucursal";
         }
         sucursalService.saveOrUpdate(sucursal);
@@ -56,7 +64,7 @@ public class SucursalController {
     @GetMapping("/delete/{id}")
     public String deleteSucursal(@PathVariable("id") int id, Model model) {
         //Sucursal sucursal = sucursalService.findById(id);
-                //.orElseThrow(() -> new IllegalArgumentException("Invalid Id:" + id));
+        //.orElseThrow(() -> new IllegalArgumentException("Invalid Id:" + id));
         sucursalService.deleteById(id);
         return "redirect:/getAll";
     }
@@ -74,9 +82,18 @@ public class SucursalController {
     }
 
     @GetMapping("/getOne")
-    public String showSucursal(SucursalDTO dto, Model model) {
+    public String showSucursal(SucursalDTO dto, Model model) throws ResourceNotFoundException {
         SucursalDTO sucursal = sucursalService.findById(dto.getPk_SucursalID());
         model.addAttribute("sucursal", sucursal);
         return "show-sucursal";
+    }
+
+    @ExceptionHandler(value = ResourceNotFoundException.class)
+    public ModelAndView notFoundErrorHandler(HttpServletRequest req, ResourceNotFoundException e) {
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("exception", e);
+        mav.addObject("url", req.getRequestURL());
+        mav.setViewName("error2");
+        return mav;
     }
 }

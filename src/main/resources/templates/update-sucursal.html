@@ -4,6 +4,7 @@
 <head>
     <meta charset="ISO-8859-1">
     <title> CRUD amb Spring Boot i MySQL</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 
 <body>
@@ -14,14 +15,17 @@
 
         <form action="#" th:action="@{/update/{id}(id=${sucursal.pk_SucursalID})}" th:object="${sucursal}" method="post">
             <label for="nomSucursal">Nom sucursal</label>
-            <input type="text" th:field="*{nomSucursal}" id="nomSucursal" placeholder="Nom sucursal">
+            <input type="text" th:field="*{nomSucursal}" id="nomSucursal" placeholder="Nom sucursal" class="form-control mb-4 col-4">
             <span th:if="${#fields.hasErrors('nomSucursal')}" th:errors="*{nomSucursal}"></span>
             <label for="paisSucursal">Pais sucursal</label>
-            <input type="text" th:field="*{paisSucursal}" id="paisSucursal" placeholder="Pais sucursal">
+            <input type="text" th:field="*{paisSucursal}" id="paisSucursal" placeholder="Pais sucursal" class="form-control mb-4 col-4">
             <span th:if="${#fields.hasErrors('paisSucursal')}" th:errors="*{paisSucursal}"></span>
-            <input type="submit" value="Modificar">
+            <button type="submit" class="btn btn-info col-2">Modificar</button>
         </form>
-
+        <hr>
+        <p th:text="${errorMessage}"></p>
+        <hr>
+        <a th:href="@{/getAll}" class="btn btn-primary btn-sm mb-3"> Enrere </a>
     </div>
 </body>
 </html>

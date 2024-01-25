@@ -5,10 +5,14 @@ import jakarta.validation.constraints.NotBlank;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SucursalDTO {
-    private static final List<String> PAISOS_UE = new ArrayList<>();
+    private static final List<String> PAISOS_UE = Arrays.asList("alemanya", "austria", "belgica", "bulgaria",
+            "xipre", "croacia", "dinamarca", "eslovaquia", "eslovenia", "espanya", "estonia", "finlandia", "francia",
+            "grecia", "hongria", "irlanda", "italia", "letonia", "lituania", "luxemburg", "malta", "paisos baixos",
+            "polonia", "portugal", "republica txeca", "romania", "suecia");
     private Integer pk_SucursalID;
     @NotBlank(message = "Aquest camp és obligatori")
     private String nomSucursal;
@@ -58,7 +62,7 @@ public class SucursalDTO {
         sucursalDTO.setNomSucursal(sucursal.getNomSucursal());
         sucursalDTO.setPaisSucursal(sucursal.getPaisSucursal());
 
-        if (SucursalDTO.getPaisosUe().contains(sucursal.getPaisSucursal())) {
+        if (SucursalDTO.getPaisosUe().contains(sucursal.getPaisSucursal().toLowerCase())) {
             sucursalDTO.setTipusSucursal("UE");
         } else {
             sucursalDTO.setTipusSucursal("Fora UE");

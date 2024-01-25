@@ -4,6 +4,7 @@
 <head>
     <meta charset="ISO-8859-1">
     <title> CRUD amb Spring Boot i MySQL</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 
 <body>
@@ -11,7 +12,7 @@
     <h1>Llista de sucursals</h1>
     <hr>
     <h2>Cerca</h2>
-    <table>
+    <table class="table table-striped table-responsive-md">
         <thead>
         <tr>
             <th>Nom</th>
@@ -26,12 +27,12 @@
             <td th:text="${sucursal.nomSucursal}"></td>
             <td th:text="${sucursal.paisSucursal}"></td>
             <td th:text="${sucursal.tipusSucursal}"></td>
-            <td><a th:href="@{/edit/{id}(id=${sucursal.pk_SucursalID})}">Edit</a></td>
-            <td><a th:href="@{/delete/{id}(id=${sucursal.pk_SucursalID})}">Delete</a></td>
+            <td><a th:href="@{/edit/{id}(id=${sucursal.pk_SucursalID})}" class="btn btn-primary">Edit</a></td>
+            <td><a th:href="@{/delete/{id}(id=${sucursal.pk_SucursalID})}" class="btn btn-danger">Delete</a></td>
         </tr>
         </tbody>
     </table>
-    <p><a href="/getAll">Enrere</a></p>
+    <a th:href="@{/getAll}" class="btn btn-primary btn-sm mb-3"> Enrere </a>
 </div>
 </body>
 </html>

@@ -93,7 +93,7 @@ public class SucursalController {
         ModelAndView mav = new ModelAndView();
         mav.addObject("exception", e);
         mav.addObject("url", req.getRequestURL());
-        mav.setViewName("error2");
+        mav.setViewName("error-not-found");
         return mav;
     }
 }

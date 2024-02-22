@@ -6,12 +6,12 @@ import cat.itacademy.barcelonactiva.solereina.manel.s05.t01.n01.model.exceptions
 import java.util.List;
 
 public interface SucursalService {
-    public SucursalDTO findById(int id) throws ResourceNotFoundException;
+    SucursalDTO findById(int id) throws ResourceNotFoundException;
 
-    public List<SucursalDTO> findAll();
+    List<SucursalDTO> findAll();
 
-    public SucursalDTO saveOrUpdate (SucursalDTO sucursal);
+    SucursalDTO saveOrUpdate (SucursalDTO sucursal);
 
-    public void deleteById(int id);
+    void deleteById(int id);
 
 }

@@ -20,10 +20,6 @@ public class SucursalDTO {
     private String paisSucursal;
     private String tipusSucursal;
 
-    public static List<String> getPaisosUe() {
-        return PAISOS_UE;
-    }
-
     public Integer getPk_SucursalID() {
         return pk_SucursalID;
     }
@@ -62,7 +58,7 @@ public class SucursalDTO {
         sucursalDTO.setNomSucursal(sucursal.getNomSucursal());
         sucursalDTO.setPaisSucursal(sucursal.getPaisSucursal());
 
-        if (SucursalDTO.getPaisosUe().contains(sucursal.getPaisSucursal().toLowerCase())) {
+        if (SucursalDTO.PAISOS_UE.contains(sucursal.getPaisSucursal().toLowerCase())) {
             sucursalDTO.setTipusSucursal("UE");
         } else {
             sucursalDTO.setTipusSucursal("Fora UE");

@@ -34,6 +34,7 @@ public class SucursalServiceImpl implements SucursalService {
                         SucursalDTO.toSucursal(sucursal)));
     }
     public void deleteById(int id) {
+
         sucursalRepository.deleteById(id);
     }
 }

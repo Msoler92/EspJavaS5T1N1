@@ -19,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class SucursalController {
 
     @Autowired
-    SucursalService sucursalService;
+    private SucursalService sucursalService;
 
     @GetMapping("/signup")
     public String showSignUpForm(SucursalDTO sucursal, Model model) {
